@@ -1,0 +1,195 @@
+:root {
+    --dark  : #141010;
+    --black : #000000;
+    --pry   : #546011;
+    --grey  : #7c7c7c;
+    --secInd: #c62727;
+}
+
+body {
+    display    : grid;
+    place-items: center;
+    min-height : 100vh;
+    background : var(--dark);
+}
+
+
+.clock-wrapper {
+    width        : min(95%, 18rem);
+    aspect-ratio : 1/1;
+    border-radius: 50%;
+    border       : .5rem inset var(--pry);
+    box-shadow   : 0 0 2rem .9rem var(--black);
+    position     : relative;
+
+    .glass {
+        position     : absolute;
+        background   : linear-gradient(to top, #ffffff17, #33333317, #ffffff17);
+        z-index      : 1000;
+        width        : 100%;
+        height       : 100%;
+        border-radius: inherit;
+        box-shadow   : 0 0 .8rem .5rem #000000 inset;
+    }
+
+    .markings-wrapper {
+        width          : 100%;
+        height         : 100%;
+        border-radius  : inherit;
+        display        : flex;
+        justify-content: center;
+        position       : relative;
+
+        &:before,
+        &:after {
+            content   : '';
+            position  : absolute;
+            top       : 0;
+            left      : 50%;
+            transform : translateX(-50%);
+            background: var(--pry);
+            width     : .2rem;
+            height    : 100%;
+        }
+
+        &:after {
+            transform: rotate(90deg);
+        }
+
+        .marking {
+            background: var(--grey);
+            width     : .05rem;
+
+            &:nth-child(1) {
+                transform: rotate(30deg);
+            }
+
+            &:nth-child(2) {
+                transform: rotate(60deg);
+            }
+
+            &:nth-child(3) {
+                transform: rotate(120deg);
+            }
+
+            &:nth-child(4) {
+                transform: rotate(150deg);
+            }
+        }
+    }
+
+    .indicators {
+        position     : absolute;
+        background   : var(--dark);
+        width        : 80%;
+        aspect-ratio : 1/1;
+        border-radius: inherit;
+        top          : 50%;
+        left         : 50%;
+        transform    : translate(-50%, -50%);
+        display      : grid;
+        place-items  : center;
+
+        .arc {
+            width        : 50%;
+            aspect-ratio : 1/1;
+            border-radius: 50%;
+            box-shadow   : 0 0 0 .2rem var(--pry), 0 0 .5rem .5rem #00000098;
+            display      : grid;
+
+
+            p {
+                margin    : 0;
+                position  : relative;
+                top       : 110%;
+                text-align: center;
+                color     : var(--grey);
+            }
+        }
+
+        &:before {
+            content      : '';
+            position     : absolute;
+            top          : 0;
+            z-index      : 110;
+            left         : 0;
+            width        : 5%;
+            aspect-ratio : 1/1;
+            border-radius: 50%;
+            top          : 50%;
+            left         : 50%;
+            transform    : translate(-50%, -50%);
+            box-shadow   : 0 0 .3rem .9rem var(--dark) inset, 0 0 .3rem .9rem var(--pry) inset;
+        }
+
+        .sec,
+        .hr,
+        .min {
+            --rotate        : 90deg;
+            position        : absolute;
+            right           : 50%;
+            height          : .15rem;
+            transform       : rotate(var(--rotate));
+            transform-origin: 100%;
+            z-index         : 100;
+        }
+
+        .sec {
+            background: var(--secInd);
+            width     : 45%;
+        }
+
+        .hr {
+            background: var(--pry);
+            width     : 20%;
+        }
+
+        .min {
+            background: var(--grey);
+            width     : 35%;
+        }
+    }
+
+    .dig-time {
+        position      : absolute;
+        display       : flex;
+        background    : var(--dark);
+        padding-inline: .4rem;
+        border-radius : .25rem;
+        bottom        : 23%;
+        left          : 50%;
+        transform     : translate(-50%);
+        gap           : .3em;
+        color         : var(--pry);
+        box-shadow    : 0 .1rem .1rem #00000098;
+        border-bottom : .2rem solid var(--pry);
+
+        &:before {
+            content   : '';
+            position  : absolute;
+            bottom    : 0;
+            left      : 0;
+            width     : .2rem;
+            height    : 44%;
+            background: var(--pry);
+        }
+
+        &:after {
+            content   : '';
+            position  : absolute;
+            bottom    : 0;
+            right     : 0;
+            width     : .2rem;
+            height    : 44%;
+            background: var(--pry);
+        }
+
+        p {
+            margin     : 0;
+            color      : var(--grey);
+            user-select: none;
+            position   : relative;
+            z-index    : 10;
+        }
+    }
+}
